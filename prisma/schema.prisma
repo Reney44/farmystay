@@ -1,0 +1,109 @@
+// FarmyStay — Prisma schema
+// Dev: SQLite (file-based, zero setup). Production/serverless: switch
+// `provider` to "postgresql" and `url` to a Neon/Supabase connection string
+// (see DEPLOYMENT.md) — the rest of this schema is unchanged.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  OWNER
+  BROKER
+  USER
+}
+
+enum PropertyCategory {
+  LAND
+  LAND_WITH_BUILDING
+  WETLAND
+  DRYLAND
+}
+
+enum ListingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum SizeUnit {
+  CENT
+  ACRE
+  SQFT
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+model User {
+  id            String     @id @default(cuid())
+  name          String
+  email         String     @unique
+  phone         String?
+  passwordHash  String
+  role          Role       @default(USER)
+  isBlocked     Boolean    @default(false)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  properties    Property[]
+}
+
+model Location {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  nameMl    String?
+  district  String?
+  createdAt DateTime   @default(now())
+  properties Property[]
+}
+
+model Property {
+  id                 String            @id @default(cuid())
+  title              String
+  description        String
+  category           PropertyCategory
+  price              Float
+  size               Float
+  sizeUnit           SizeUnit          @default(CENT)
+  locationId         String
+  location           Location          @relation(fields: [locationId], references: [id])
+  addressDetails     String?
+  nearbyAttractions  String?
+  latitude           Float?
+  longitude          Float?
+  sellerType         Role              @default(OWNER)
+  contactName        String
+  contactPhone       String
+  contactEmail       String?
+  status             ListingStatus     @default(PENDING)
+  rejectionReason    String?
+  featured           Boolean           @default(false)
+  viewCount          Int               @default(0)
+  ownerId            String
+  owner              User              @relation(fields: [ownerId], references: [id])
+  media              PropertyMedia[]
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  @@index([status])
+  @@index([category])
+  @@index([locationId])
+}
+
+model PropertyMedia {
+  id         String    @id @default(cuid())
+  propertyId String
+  property   Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  type       MediaType
+  url        String
+  order      Int       @default(0)
+  createdAt  DateTime  @default(now())
+}

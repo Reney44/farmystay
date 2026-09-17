@@ -1,0 +1,133 @@
+{
+  "site": {
+    "name": "farmystay.com",
+    "shortName": "FarmyStay",
+    "tagline": "Land & Property in Kerala's Hill Country"
+  },
+  "nav": {
+    "home": "Home",
+    "search": "Search Properties",
+    "addProperty": "Add Property",
+    "dashboard": "My Listings",
+    "admin": "Admin",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "home": {
+    "heroTitle": "Find Your Piece of the Hills",
+    "heroSubtitle": "Land, farms and homes around Marayoor, Kanthalloor and beyond",
+    "searchCta": "Search Properties",
+    "addCta": "List Your Property",
+    "featured": "Featured Properties",
+    "browseByLocation": "Browse by Location",
+    "allProperties": "Latest Properties",
+    "noProperties": "No properties listed yet — be the first!",
+    "viewAll": "View all properties"
+  },
+  "search": {
+    "title": "Search Properties",
+    "location": "Location",
+    "allLocations": "All Locations",
+    "category": "Category",
+    "allCategories": "All Categories",
+    "minPrice": "Min Price",
+    "maxPrice": "Max Price",
+    "minSize": "Min Size",
+    "maxSize": "Max Size",
+    "sizeUnit": "Size Unit",
+    "apply": "Apply Filters",
+    "reset": "Reset",
+    "noResults": "No properties match your search. Try widening your filters.",
+    "resultsCount": "{count} properties found"
+  },
+  "category": {
+    "LAND": "Land",
+    "LAND_WITH_BUILDING": "Land with Building",
+    "WETLAND": "Wetland",
+    "DRYLAND": "Dryland"
+  },
+  "sizeUnit": {
+    "CENT": "Cent",
+    "ACRE": "Acre",
+    "SQFT": "Sq.ft"
+  },
+  "property": {
+    "price": "Price",
+    "size": "Size",
+    "category": "Category",
+    "location": "Location",
+    "listedBy": "Listed by",
+    "owner": "Owner",
+    "broker": "Broker",
+    "contact": "Contact Information",
+    "contactName": "Name",
+    "contactPhone": "Phone",
+    "contactEmail": "Email",
+    "nearbyAttractions": "Nearby Attractions",
+    "description": "Description",
+    "photos": "Photos",
+    "videos": "Videos",
+    "pending": "Pending Approval",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "form": {
+    "title": "Title",
+    "description": "Description",
+    "category": "Category",
+    "price": "Price (INR)",
+    "size": "Size",
+    "sizeUnit": "Unit",
+    "location": "Location",
+    "pinLocation": "pin it on the map below",
+    "addressDetails": "Address / Landmark Details",
+    "nearbyAttractions": "Nearby Attractions (optional)",
+    "sellerType": "You are",
+    "contactName": "Contact Name",
+    "contactPhone": "Contact Phone",
+    "contactEmail": "Contact Email (optional)",
+    "photos": "Photos",
+    "videos": "Videos (optional)",
+    "submit": "Submit for Approval",
+    "submitting": "Submitting...",
+    "uploadHint": "You can upload multiple photos and short videos of the property"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Full Name",
+    "phone": "Phone Number",
+    "loginTitle": "Login",
+    "registerTitle": "Create an Account",
+    "iAmA": "I am a",
+    "owner": "Property Owner",
+    "broker": "Broker / Agent",
+    "loginButton": "Login",
+    "registerButton": "Register",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "error": "Invalid email or password"
+  },
+  "dashboard": {
+    "title": "My Listings",
+    "empty": "You haven't listed any properties yet.",
+    "edit": "Edit",
+    "delete": "Delete",
+    "status": "Status"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "pending": "Pending Approvals",
+    "allListings": "All Listings",
+    "users": "Users",
+    "locations": "Locations",
+    "approve": "Approve",
+    "reject": "Reject",
+    "block": "Block",
+    "unblock": "Unblock",
+    "makeAdmin": "Make Admin",
+    "addLocation": "Add Location",
+    "noPending": "No properties waiting for approval."
+  }
+}

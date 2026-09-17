@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FarmyStay
 
-## Getting Started
+A bilingual (English/Malayalam) real-estate listing site for land, farms and
+homes around Marayoor, Kanthalloor and other hill-country locations in
+Kerala. Built so it's easy to expand to more villages/towns over time.
 
-First, run the development server:
+## Features
+
+- **Search properties** — filter by location, price range, size, and
+  category (land / land with building / wetland / dryland).
+- **Add property** — owners and brokers can list a property with photos,
+  videos, price, size, category, location and contact details.
+- **Admin dashboard** — every new listing starts as *Pending* and only goes
+  live after an admin approves it. Admins can also reject listings, delete
+  any listing, block/unblock users, promote a user to admin, and add new
+  locations as the site expands beyond Marayoor/Kanthalloor.
+- **English + Malayalam** — toggle in the top-right of every page.
+
+## Tech stack
+
+- Next.js 15 (App Router) + TypeScript + Tailwind CSS
+- Prisma ORM — SQLite for local development, swaps to Postgres for
+  production (see `DEPLOYMENT.md`)
+- NextAuth (Credentials + JWT sessions) with roles: `ADMIN`, `OWNER`,
+  `BROKER`
+- next-intl for English/Malayalam
+- Photos/videos are stored under `public/uploads` locally; see
+  `DEPLOYMENT.md` for swapping to cloud storage before a serverless deploy.
+
+## Getting started (local development)
 
 ```bash
+npm install
+npx prisma migrate dev --name init
+npm run seed
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`npm run seed` creates:
+- The two starting locations: Marayoor and Kanthalloor
+- One admin account (check the terminal output for the email/password —
+  configurable via `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD` env vars
+  before seeding)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Regular users register themselves from the "Register" page as either an
+**Owner** or a **Broker**. Admin accounts are not self-service — they're
+seeded directly, or promoted by an existing admin from **Admin → Users**.
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app/[locale]/...` — pages (home, search, property detail, login,
+  register, dashboard, admin), one folder per locale-aware route
+- `src/app/api/...` — API routes (auth, register, properties, upload,
+  locations, admin/users)
+- `prisma/schema.prisma` — database schema
+- `messages/en.json`, `messages/ml.json` — UI translations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Going to production
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `DEPLOYMENT.md` — it walks through switching the database to a hosted
+Postgres instance and moving photo/video storage to Cloudinary before
+deploying to Vercel or Netlify (both platforms run this as serverless
+functions, which don't keep local files permanently).
