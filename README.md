@@ -18,20 +18,24 @@ Kerala. Built so it's easy to expand to more villages/towns over time.
 
 ## Tech stack
 
-- Next.js 15 (App Router) + TypeScript + Tailwind CSS
-- Prisma ORM — SQLite for local development, swaps to Postgres for
-  production (see `DEPLOYMENT.md`)
+- Next.js (App Router) + TypeScript + Tailwind CSS
+- Prisma ORM — Postgres (Supabase), shared between local dev and production
 - NextAuth (Credentials + JWT sessions) with roles: `ADMIN`, `OWNER`,
   `BROKER`
 - next-intl for English/Malayalam
-- Photos/videos are stored under `public/uploads` locally; see
-  `DEPLOYMENT.md` for swapping to cloud storage before a serverless deploy.
+- Leaflet for the map view and the pin-drop location picker
+- Photos/videos are stored under `public/uploads` locally, or Cloudinary
+  once `CLOUDINARY_*` env vars are set (see `DEPLOYMENT.md`)
 
 ## Getting started (local development)
 
+Copy `.env.example` to `.env` and fill in a Supabase connection string
+(`DATABASE_URL` + `DIRECT_URL` — see `.env.example` for where to find
+these), then:
+
 ```bash
 npm install
-npx prisma migrate dev --name init
+npx prisma migrate dev
 npm run seed
 npm run dev
 ```
@@ -59,7 +63,5 @@ seeded directly, or promoted by an existing admin from **Admin → Users**.
 
 ## Going to production
 
-See `DEPLOYMENT.md` — it walks through switching the database to a hosted
-Postgres instance and moving photo/video storage to Cloudinary before
-deploying to Vercel or Netlify (both platforms run this as serverless
-functions, which don't keep local files permanently).
+See `DEPLOYMENT.md` — it tracks the remaining steps to deploy to Hostinger
+at farmystay.com.
