@@ -4,28 +4,20 @@
 
 - [x] Code pushed to GitHub — https://github.com/Reney44/farmystay
 - [x] Postgres database (Supabase) created, migrated, and seeded
-- [ ] Cloudinary account for photo/video storage
+- [x] Cloudinary connected — photo/video uploads confirmed working
 - [ ] Node.js Web App created in hPanel
 - [ ] `farmystay.com` attached to the site
 
 The app now runs on a real hosted Postgres (Supabase) for both local dev
-and production — there's no more local SQLite file. Photo/video uploads
-still fall back to local disk until Cloudinary is configured (fine for
-dev, not for Hostinger, which doesn't keep local files between deploys).
+and production, and uploads go to Cloudinary instead of local disk. What's
+left is entirely on the Hostinger side.
 
-## 1. Create a Cloudinary account for photo/video storage
+## 1. Environment variables you'll need on Hostinger
 
-1. Sign up at https://cloudinary.com (free tier).
-2. From the dashboard, copy your **Cloud name**, **API key**, and
-   **API secret**, and send them to me — I'll wire them into `.env` and
-   `src/app/api/upload/route.ts` already switches to Cloudinary
-   automatically once these three are set.
-
-## 2. Environment variables you'll need on Hostinger
-
-Once Cloudinary is set up, these all get entered as environment variables
-in the Hostinger Node.js app's settings (hPanel → your site → Node.js →
-Environment variables):
+These get entered as environment variables in the Hostinger Node.js app's
+settings (hPanel → your site → Node.js → Environment variables). Ask me
+for the actual values when you're ready to fill this in on the hPanel
+screen — they're already sitting in this project's local `.env`.
 
 | Variable | Value |
 |---|---|
@@ -33,11 +25,11 @@ Environment variables):
 | `DIRECT_URL` | The session-mode (`:5432`) Supabase connection string |
 | `AUTH_SECRET` | A long random string (e.g. from `openssl rand -base64 32`) — use a **different** one from local dev |
 | `NEXTAUTH_URL` | `https://farmystay.com` |
-| `CLOUDINARY_CLOUD_NAME` | From Cloudinary dashboard |
-| `CLOUDINARY_API_KEY` | From Cloudinary dashboard |
-| `CLOUDINARY_API_SECRET` | From Cloudinary dashboard |
+| `CLOUDINARY_CLOUD_NAME` | `caje1sco` |
+| `CLOUDINARY_API_KEY` | From your Cloudinary dashboard |
+| `CLOUDINARY_API_SECRET` | From your Cloudinary dashboard |
 
-## 3. Create the Node.js Web App in hPanel
+## 2. Create the Node.js Web App in hPanel
 
 1. In hPanel: **Websites → Add Website → Push your code, we host it → Node.js**.
 2. Choose **Import Git Repository** and connect `Reney44/farmystay`
@@ -50,14 +42,14 @@ Environment variables):
 5. Deploy. Hostinger will rebuild automatically on every future merge to
    `main`.
 
-## 4. Point farmystay.com at the new site
+## 3. Point farmystay.com at the new site
 
 Since the domain and hosting are on the same Hostinger account, attach
 `farmystay.com` to this website from the site's **Domain** settings in
 hPanel (this is usually just selecting the domain from a dropdown — no
 external DNS changes needed since it's already with Hostinger).
 
-## 5. After the first deploy
+## 4. After the first deploy
 
 1. Log in with the seeded admin account and **change the admin password**
    (currently `admin@farmystay.com` / `ChangeMe123!` — fine for testing,
