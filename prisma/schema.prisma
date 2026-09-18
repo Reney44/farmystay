@@ -1,15 +1,16 @@
 // FarmyStay — Prisma schema
-// Dev: SQLite (file-based, zero setup). Production/serverless: switch
-// `provider` to "postgresql" and `url` to a Neon/Supabase connection string
-// (see DEPLOYMENT.md) — the rest of this schema is unchanged.
+// Postgres (Supabase). `url` is the pooled (pgbouncer) connection used at
+// runtime; `directUrl` is the unpooled session connection Prisma Migrate
+// needs for schema changes. See DEPLOYMENT.md.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 enum Role {
