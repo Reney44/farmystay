@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-const DUMMY_LISTER_EMAIL = "demo@farmystay.com";
+const DUMMY_LISTER_EMAIL = "demo@junbriz.com";
 
 const DUMMY_PROPERTIES = [
   {
@@ -150,7 +150,7 @@ async function main() {
     });
   }
 
-  const adminEmail = process.env.SEED_ADMIN_EMAIL || "admin@farmystay.com";
+  const adminEmail = process.env.SEED_ADMIN_EMAIL || "admin@junbriz.com";
   const adminPassword = process.env.SEED_ADMIN_PASSWORD || "ChangeMe123!";
 
   const existingAdmin = await prisma.user.findUnique({ where: { email: adminEmail } });

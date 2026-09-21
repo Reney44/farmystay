@@ -20,7 +20,7 @@ export function uploadToCloudinary(
 
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
-      { resource_type: resourceType, folder: "farmystay" },
+      { resource_type: resourceType, folder: "junbriz" },
       (error, result) => {
         if (error || !result) return reject(error);
         resolve(result.secure_url);

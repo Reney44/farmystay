@@ -1,4 +1,6 @@
-# FarmyStay
+# JunBriz
+
+*Where Nature Becomes Home.*
 
 A bilingual (English/Malayalam) real-estate listing site for land, farms and
 homes around Marayoor, Kanthalloor and other hill-country locations in
@@ -64,4 +66,4 @@ seeded directly, or promoted by an existing admin from **Admin → Users**.
 ## Going to production
 
 See `DEPLOYMENT.md` — it tracks the remaining steps to deploy to Hostinger
-at farmystay.com.
+at junbriz.com.

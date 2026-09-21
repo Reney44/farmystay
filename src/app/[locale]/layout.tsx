@@ -17,8 +17,8 @@ const notoMalayalam = Noto_Sans_Malayalam({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | farmystay.com",
-    default: "farmystay.com | Kerala Land & Property",
+    template: "%s | JunBriz.com",
+    default: "JunBriz.com | Where Nature Becomes Home",
   },
   description:
     "Search and list land, farms and homes around Marayoor, Kanthalloor and beyond.",
