@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/navigation";
 import { registerSchema, type RegisterInput } from "@/lib/validations";
+import GoogleSignInButton from "./GoogleSignInButton";
 
 export default function RegisterForm() {
   const t = useTranslations("auth");
@@ -124,6 +125,14 @@ export default function RegisterForm() {
       >
         {t("registerButton")}
       </button>
+
+      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <span className="h-px flex-1 bg-border" />
+        {t("or")}
+        <span className="h-px flex-1 bg-border" />
+      </div>
+
+      <GoogleSignInButton />
 
       <p className="text-sm text-muted-foreground">
         {t("haveAccount")}{" "}

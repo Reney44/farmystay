@@ -1,11 +1,12 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { Plus, MapPin, ArrowRight } from "lucide-react";
+import { MapPin, ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { localizedLocationName } from "@/lib/format";
 import PropertyCard from "@/components/PropertyCard";
 import PropertyResults from "@/components/PropertyResults";
 import QuickSearchBar from "@/components/QuickSearchBar";
+import WhyJunBriz from "@/components/WhyJunBriz";
 
 const HOME_LISTING_LIMIT = 12;
 
@@ -55,16 +56,10 @@ export default async function HomePage() {
           <p className="max-w-xl text-muted-foreground">{t("heroSubtitle")}</p>
 
           <QuickSearchBar locations={locations} />
-
-          <Link
-            href="/dashboard/add-property"
-            className="flex items-center gap-2 text-sm font-medium text-accent hover:underline"
-          >
-            <Plus className="h-4 w-4" />
-            {t("addCta")}
-          </Link>
         </div>
       </section>
+
+      <WhyJunBriz />
 
       {locations.length > 0 && (
         <section className="mx-auto max-w-6xl px-4 pt-8">

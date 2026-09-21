@@ -2,9 +2,10 @@
 
 *Where Nature Becomes Home.*
 
-A bilingual (English/Malayalam) real-estate listing site for land, farms and
-homes around Marayoor, Kanthalloor and other hill-country locations in
-Kerala. Built so it's easy to expand to more villages/towns over time.
+A bilingual (English/Malayalam) community site for people who love nature
+and farming, built around discovering land, farms and homes across Kerala.
+No single location is favored — admins can add any location, and the site
+is designed to grow organically as the community does.
 
 ## Features
 
@@ -15,7 +16,7 @@ Kerala. Built so it's easy to expand to more villages/towns over time.
 - **Admin dashboard** — every new listing starts as *Pending* and only goes
   live after an admin approves it. Admins can also reject listings, delete
   any listing, block/unblock users, promote a user to admin, and add new
-  locations as the site expands beyond Marayoor/Kanthalloor.
+  locations at any time — the location list is fully admin-managed.
 - **English + Malayalam** — toggle in the top-right of every page.
 
 ## Tech stack
