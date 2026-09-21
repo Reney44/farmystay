@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
+import GoogleSignInButton from "./GoogleSignInButton";
 
 export default function LoginForm() {
   const t = useTranslations("auth");
@@ -74,6 +75,14 @@ export default function LoginForm() {
       >
         {t("loginButton")}
       </button>
+
+      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <span className="h-px flex-1 bg-border" />
+        {t("or")}
+        <span className="h-px flex-1 bg-border" />
+      </div>
+
+      <GoogleSignInButton />
 
       <p className="text-sm text-muted-foreground">
         {t("noAccount")}{" "}

@@ -16,14 +16,24 @@
   },
   "home": {
     "heroTitle": "Find Your Piece of the Hills",
-    "heroSubtitle": "Land, farms and homes around Marayoor, Kanthalloor and beyond",
+    "heroSubtitle": "A community for people who love nature and farming — discovering land and homes across Kerala's countryside.",
     "searchCta": "Search Properties",
     "addCta": "List Your Property",
     "featured": "Featured Properties",
     "browseByLocation": "Browse by Location",
-    "allProperties": "Latest Properties",
+    "allProperties": "Explore the Community's Land",
     "noProperties": "No properties listed yet — be the first!",
-    "viewAll": "View all properties"
+    "viewAll": "View all properties",
+    "whyTitle": "Why People Come to JunBriz",
+    "whyIntro": "This isn't just a listings site — it's a home for people who'd rather live close to the soil than far from it.",
+    "why1Title": "Live Closer to Nature",
+    "why1Body": "Discover land tucked into nature — cardamom estates, sandalwood groves, riverside plots, and quiet farmland wherever our community grows.",
+    "why2Title": "Start Farming, Your Way",
+    "why2Body": "Whether it's a kitchen garden or a working plantation, every listing here is a starting point for a life closer to the soil.",
+    "why3Title": "Join Like-Minded Neighbours",
+    "why3Body": "JunBriz is built for people who care about nature and slow living — not just buyers and sellers. Browse, connect, and learn from the community.",
+    "why4Title": "Every Listing, Verified",
+    "why4Body": "Our team reviews every property before it goes live, so what you see is what's really there."
   },
   "search": {
     "title": "Search Properties",
@@ -107,7 +117,8 @@
     "registerButton": "Register",
     "noAccount": "Don't have an account?",
     "haveAccount": "Already have an account?",
-    "error": "Invalid email or password"
+    "error": "Invalid email or password",
+    "or": "or"
   },
   "dashboard": {
     "title": "My Listings",

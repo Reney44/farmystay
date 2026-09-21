@@ -5,7 +5,6 @@ import LocaleSwitcher from "./LocaleSwitcher";
 import LogoutButton from "./LogoutButton";
 import Logo from "./Logo";
 import Wordmark from "./Wordmark";
-import { Plus } from "lucide-react";
 
 export default async function Navbar() {
   const t = await getTranslations("nav");
@@ -44,13 +43,6 @@ export default async function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            href="/dashboard/add-property"
-            className="hidden items-center gap-1 rounded-md bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground hover:opacity-90 sm:flex"
-          >
-            <Plus className="h-4 w-4" />
-            {t("addProperty")}
-          </Link>
           {session?.user ? (
             <LogoutButton />
           ) : (
@@ -64,6 +56,12 @@ export default async function Navbar() {
             </>
           )}
           <LocaleSwitcher />
+          <Link
+            href="/dashboard/add-property"
+            className="hidden text-xs text-muted-foreground hover:text-foreground sm:block"
+          >
+            {t("addProperty")}
+          </Link>
         </div>
       </div>
     </header>

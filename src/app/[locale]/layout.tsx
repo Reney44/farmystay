@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     default: "JunBriz.com | Where Nature Becomes Home",
   },
   description:
-    "Search and list land, farms and homes around Marayoor, Kanthalloor and beyond.",
+    "Search and list land, farms and homes across Kerala's countryside — a community for nature and farming lovers.",
 };
 
 export function generateStaticParams() {
