@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import Logo from "./Logo";
+import Wordmark from "./Wordmark";
 
 export default async function Footer() {
   const site = await getTranslations("site");
@@ -13,11 +14,9 @@ export default async function Footer() {
         <div>
           <div className="flex items-center gap-2.5">
             <Logo className="h-9 w-9" />
-            <span className="text-lg font-bold tracking-tight text-foreground">
-              {site("name")}
-            </span>
+            <Wordmark className="text-lg" />
           </div>
-          <p className="mt-2 max-w-xs text-sm text-muted-foreground">{site("tagline")}</p>
+          <p className="mt-2 max-w-xs text-sm italic text-muted-foreground">{site("tagline")}</p>
         </div>
 
         <div className="flex gap-6 text-sm">

@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import LocaleSwitcher from "./LocaleSwitcher";
 import LogoutButton from "./LogoutButton";
 import Logo from "./Logo";
+import Wordmark from "./Wordmark";
 import { Plus } from "lucide-react";
 
 export default async function Navbar() {
@@ -19,10 +20,8 @@ export default async function Navbar() {
         <Link href="/" className="flex items-center gap-3">
           <Logo className="h-11 w-11 shrink-0" />
           <span className="flex flex-col leading-tight">
-            <span className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
-              {site("name")}
-            </span>
-            <span className="hidden text-xs text-muted-foreground sm:block">
+            <Wordmark className="text-xl sm:text-2xl" />
+            <span className="hidden text-xs italic text-muted-foreground sm:block">
               {site("tagline")}
             </span>
           </span>

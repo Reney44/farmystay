@@ -38,6 +38,7 @@
   --color-ring: var(--ring);
   --font-sans: var(--font-body);
   --font-malayalam: var(--font-malayalam);
+  --font-display: var(--font-display);
 }
 
 body {

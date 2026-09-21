@@ -1,59 +1,52 @@
-# Deploying to Hostinger (farmystay.com)
+# Deploying to Hostinger (junbriz.com)
 
 ## Status
 
 - [x] Code pushed to GitHub — https://github.com/Reney44/farmystay
+      (repo name kept as-is; renaming it would need re-linking the
+      Hostinger GitHub integration, so only rename if you specifically want to)
 - [x] Postgres database (Supabase) created, migrated, and seeded
 - [x] Cloudinary connected — photo/video uploads confirmed working
-- [ ] Node.js Web App created in hPanel
-- [ ] `farmystay.com` attached to the site
+- [x] Node.js Web App created in hPanel, build succeeding (Business plan,
+      running on a temporary `*.hostingersite.com` domain for now)
+- [ ] `junbriz.com` attached to the site
 
 The app now runs on a real hosted Postgres (Supabase) for both local dev
-and production, and uploads go to Cloudinary instead of local disk. What's
-left is entirely on the Hostinger side.
+and production, and uploads go to Cloudinary instead of local disk.
 
-## 1. Environment variables you'll need on Hostinger
+## Known Hostinger build quirks (already fixed)
 
-These get entered as environment variables in the Hostinger Node.js app's
-settings (hPanel → your site → Node.js → Environment variables). Ask me
-for the actual values when you're ready to fill this in on the hPanel
-screen — they're already sitting in this project's local `.env`.
+Hostinger's build container has an older glibc than Next.js's native
+Turbopack/SWC bindings need, which caused two issues — both already fixed
+in the codebase:
+- `next.config.ts` → `next.config.mjs` (the WASM SWC fallback couldn't
+  load a TypeScript config)
+- `next build` → `next build --webpack` (Turbopack has no WASM fallback
+  at all and hard-fails on this platform)
+
+## Environment variables (already entered in hPanel)
 
 | Variable | Value |
 |---|---|
 | `DATABASE_URL` | The pooled (`:6543`, `pgbouncer=true`) Supabase connection string |
 | `DIRECT_URL` | The session-mode (`:5432`) Supabase connection string |
-| `AUTH_SECRET` | A long random string (e.g. from `openssl rand -base64 32`) — use a **different** one from local dev |
-| `NEXTAUTH_URL` | `https://farmystay.com` |
+| `AUTH_SECRET` | A long random string — **different** from local dev |
+| `NEXTAUTH_URL` | Must match whatever domain is actually live: the temporary Hostinger domain for now, `https://junbriz.com` once that's attached (see below) |
 | `CLOUDINARY_CLOUD_NAME` | `caje1sco` |
 | `CLOUDINARY_API_KEY` | From your Cloudinary dashboard |
 | `CLOUDINARY_API_SECRET` | From your Cloudinary dashboard |
 
-## 2. Create the Node.js Web App in hPanel
+## Point junbriz.com at the site
 
-1. In hPanel: **Websites → Add Website → Push your code, we host it → Node.js**.
-2. Choose **Import Git Repository** and connect `Reney44/farmystay`
-   (deploy from the `main` branch — that's the one protected by PRs).
-3. Hostinger auto-detects Next.js and pre-fills the build command
-   (`npm run build`) and entry file. The entry file should be
-   `.next/standalone/server.js` (this repo is already configured with
-   `output: "standalone"` in `next.config.ts` to produce this).
-4. Add the environment variables from the table above.
-5. Deploy. Hostinger will rebuild automatically on every future merge to
-   `main`.
+Once you're ready to go live on the real domain: attach `junbriz.com` to
+this website from the site's **Domain** settings in hPanel, then update
+`NEXTAUTH_URL` to `https://junbriz.com` and redeploy.
 
-## 3. Point farmystay.com at the new site
-
-Since the domain and hosting are on the same Hostinger account, attach
-`farmystay.com` to this website from the site's **Domain** settings in
-hPanel (this is usually just selecting the domain from a dropdown — no
-external DNS changes needed since it's already with Hostinger).
-
-## 4. After the first deploy
+## After going live
 
 1. Log in with the seeded admin account and **change the admin password**
-   (currently `admin@farmystay.com` / `ChangeMe123!` — fine for testing,
-   must not stay as-is in production).
+   (currently `admin@junbriz.com` / `ChangeMe123!` — fine for testing,
+   must not stay as-is once real users are around).
 2. Delete or keep the "Demo Lister" sample listings from Admin → All
    Listings, as you like.
 
@@ -65,7 +58,7 @@ for you, but if you see missing CSS or broken static assets after deploy,
 that's the cause. Let me know and I'll add a small postbuild script that
 copies `public/` and `.next/static` into `.next/standalone/` to fix it.
 
-## A note on local dev now sharing the production database
+## A note on local dev sharing the production database
 
 Since local dev and production point at the same Supabase project, be
 careful with destructive local testing (e.g. deleting listings) once the

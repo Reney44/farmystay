@@ -26,9 +26,30 @@ export default async function HomePage() {
 
   return (
     <div>
-      <section className="border-b border-border bg-gradient-to-b from-primary/10 to-transparent">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-14 text-center">
-          <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-primary/10 to-transparent">
+        <svg
+          viewBox="0 0 200 200"
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 text-primary/[0.06] sm:h-96 sm:w-96"
+        >
+          <path
+            fill="currentColor"
+            d="M100 20c34 30 60 62 60 96 0 39-27 64-60 64s-60-25-60-64c0-34 26-66 60-96z"
+          />
+        </svg>
+        <svg
+          viewBox="0 0 200 200"
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-20 -left-20 h-72 w-72 text-accent/[0.06] sm:h-96 sm:w-96"
+        >
+          <path
+            fill="currentColor"
+            d="M100 20c34 30 60 62 60 96 0 39-27 64-60 64s-60-25-60-64c0-34 26-66 60-96z"
+          />
+        </svg>
+
+        <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-14 text-center">
+          <h1 className="max-w-2xl font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             {t("heroTitle")}
           </h1>
           <p className="max-w-xl text-muted-foreground">{t("heroSubtitle")}</p>
