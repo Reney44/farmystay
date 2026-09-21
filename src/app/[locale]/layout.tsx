@@ -2,13 +2,19 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { Inter, Noto_Sans_Malayalam } from "next/font/google";
+import { Inter, Fraunces, Noto_Sans_Malayalam } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-body" });
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+});
 const notoMalayalam = Noto_Sans_Malayalam({
   subsets: ["malayalam"],
   weight: ["400", "500", "700"],
@@ -46,7 +52,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale}>
       <body
-        className={`${inter.variable} ${notoMalayalam.variable} antialiased`}
+        className={`${inter.variable} ${fraunces.variable} ${notoMalayalam.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           <div className="flex min-h-screen flex-col">
