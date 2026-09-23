@@ -136,7 +136,7 @@ const DUMMY_PROPERTIES = [
   },
 ];
 
-const FLAGSHIP_PROJECT_TITLE = "Kanthalloor Nature Resort — Villas & Farmland Investment";
+const FLAGSHIP_PROJECT_TITLE = "Reney's JunBriz Paradise";
 
 const FLAGSHIP_SITES = [
   {
@@ -205,7 +205,8 @@ async function seedFlagshipProject() {
       latitude: 10.2695,
       longitude: 77.2305,
       addressDetails: "Kanthalloor, Idukki — exact plot access road on request",
-      nearbyAttractions: "Kanthalloor fruit farms, Kambakallu viewpoint",
+      nearbyAttractions:
+        "Bhramaram Viewpoint, Kanthalloor Waterfalls, Marayoor Muniyara (dolmens), Jaggery Factory, Sandalwood Forest, Irachil Para Waterfalls",
       landType: "Purayidam",
       completionDate: "End of 2027",
       amenities: [
