@@ -136,7 +136,7 @@ const DUMMY_PROPERTIES = [
   },
 ];
 
-const FLAGSHIP_PROJECT_TITLE = "Kanthalloor Nature Resort — Villas & Farmland Investment";
+const FLAGSHIP_PROJECT_TITLE = "Reney's JunBriz Paradise";
 
 const FLAGSHIP_SITES = [
   {
