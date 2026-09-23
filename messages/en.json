@@ -80,7 +80,18 @@
     "videos": "Videos",
     "pending": "Pending Approval",
     "approved": "Approved",
-    "rejected": "Rejected"
+    "rejected": "Rejected",
+    "investmentProject": "Investment Project",
+    "aboutProject": "About This Project",
+    "theSites": "The Sites",
+    "bedrooms": "Bedrooms",
+    "amenitiesTitle": "Amenities",
+    "landType": "Land Type",
+    "completionDate": "Expected Completion",
+    "farmlandNote": "Each site includes an adjoining farmland parcel of 25–200 cents, which our team can maintain and farm on your behalf.",
+    "investTitle": "Invest in This Project",
+    "investBody": "Available as the whole project or as an individual site.",
+    "contactToInvest": "Contact Us to Invest"
   },
   "form": {
     "title": "Title",

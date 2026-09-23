@@ -11,7 +11,7 @@ const pinIcon = createPinIcon("#2f5233");
 type MapProperty = {
   id: string;
   title: string;
-  price: number;
+  price: number | null;
   latitude: number | null;
   longitude: number | null;
 };

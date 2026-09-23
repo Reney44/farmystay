@@ -36,7 +36,7 @@ export default async function EditPropertyPage({ params }: Props) {
           title: property.title,
           description: property.description,
           category: property.category,
-          price: property.price,
+          price: property.price ?? undefined,
           size: property.size,
           sizeUnit: property.sizeUnit,
           locationId: property.locationId,

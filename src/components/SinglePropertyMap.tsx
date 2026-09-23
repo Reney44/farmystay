@@ -20,7 +20,7 @@ export default function SinglePropertyMap({
 }: {
   id: string;
   title: string;
-  price: number;
+  price: number | null;
   latitude: number;
   longitude: number;
 }) {

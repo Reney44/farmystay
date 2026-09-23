@@ -1,4 +1,7 @@
-export function formatINR(value: number): string {
+export function formatINR(value: number | null | undefined, locale: string = "en"): string {
+  if (value == null) {
+    return locale === "ml" ? "വിലയ്ക്കായി ബന്ധപ്പെടുക" : "Contact for price";
+  }
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",

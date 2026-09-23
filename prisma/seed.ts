@@ -136,6 +136,108 @@ const DUMMY_PROPERTIES = [
   },
 ];
 
+const FLAGSHIP_PROJECT_TITLE = "Kanthalloor Nature Resort — Villas & Farmland Investment";
+
+const FLAGSHIP_SITES = [
+  {
+    label: "Plot 1",
+    villaType: "Restaurant & View Suite",
+    bedrooms: 2,
+    highlight: "Ground-floor restaurant & shop, panoramic 2-room suite above",
+  },
+  {
+    label: "Plot 2",
+    villaType: "Honeymoon Villa",
+    bedrooms: 2,
+    highlight: "Private whirlpool bath in the upstairs primary suite",
+  },
+  {
+    label: "Plot 3",
+    villaType: "3 Bedroom Villa",
+    bedrooms: 3,
+    highlight: "One bedroom on the ground floor, two upstairs",
+  },
+  {
+    label: "Plot 4",
+    villaType: "2 Bedroom Villa",
+    bedrooms: 2,
+    highlight: "Twin bedrooms, each with a private whirlpool ensuite",
+  },
+  {
+    label: "Plot 5",
+    villaType: "3 Bedroom Villa",
+    bedrooms: 3,
+    highlight: "Twin layout to Plot 3",
+  },
+  {
+    label: "Plot 6",
+    villaType: "6 Bedroom Villa + Common Pool",
+    bedrooms: 6,
+    highlight: "The project's largest site, anchoring the shared swimming pool",
+  },
+];
+
+async function seedFlagshipProject() {
+  const existing = await prisma.property.findFirst({
+    where: { title: FLAGSHIP_PROJECT_TITLE },
+  });
+  if (existing) {
+    console.log("Flagship project already seeded, skipping.");
+    return;
+  }
+
+  const admin = await prisma.user.findUnique({
+    where: { email: process.env.SEED_ADMIN_EMAIL || "admin@junbriz.com" },
+  });
+  const location = await prisma.location.findUnique({ where: { name: "Kanthalloor" } });
+  if (!admin || !location) return;
+
+  await prisma.property.create({
+    data: {
+      title: FLAGSHIP_PROJECT_TITLE,
+      description:
+        "A boutique 6-villa nature resort and farmland investment on 47 cents of peaceful purayidam land in Kanthalloor — for people who want more than a holiday home: a working relationship with the land itself. Each site pairs a fully designed villa with an adjoining farmland parcel (25-200 cents) that our team can maintain and farm on your behalf, so the investment grows whether or not you're there. Invest in the whole project or choose a single site.",
+      category: "LAND_WITH_BUILDING",
+      price: null,
+      size: 47,
+      sizeUnit: "CENT",
+      locationId: location.id,
+      latitude: 10.2695,
+      longitude: 77.2305,
+      addressDetails: "Kanthalloor, Idukki — exact plot access road on request",
+      nearbyAttractions: "Kanthalloor fruit farms, Kambakallu viewpoint",
+      landType: "Purayidam",
+      completionDate: "End of 2027",
+      amenities: [
+        "Common swimming pool",
+        "On-site restaurant & café with panoramic view suite",
+        "Landscaped gardens throughout",
+        "On-call maintenance & farming team for your farmland",
+        "Landscape design, architectural drawings, 3D visualization, building permits and stonework already complete",
+      ].join("\n"),
+      isProject: true,
+      sellerType: "OWNER",
+      contactName: "Reneesh",
+      contactPhone: "9000000000",
+      status: "APPROVED",
+      featured: true,
+      ownerId: admin.id,
+      media: {
+        create: [
+          { type: "IMAGE", url: "https://res.cloudinary.com/caje1sco/image/upload/v1790155904/junbriz/projects/kanthalloor-resort/v7o5nobiwd1jbyefel8g.jpg", order: 0 },
+          { type: "IMAGE", url: "https://res.cloudinary.com/caje1sco/image/upload/v1790155901/junbriz/projects/kanthalloor-resort/zucscqtouat0jlhxrwgp.webp", order: 1 },
+          { type: "IMAGE", url: "https://res.cloudinary.com/caje1sco/image/upload/v1790155903/junbriz/projects/kanthalloor-resort/hjcw1dphq2qtqpjqh7mk.webp", order: 2 },
+        ],
+      },
+      sites: {
+        create: FLAGSHIP_SITES.map((s, i) => ({ ...s, order: i })),
+      },
+    },
+  });
+
+  console.log("Flagship project seeded (contactPhone is a PLACEHOLDER — update it).");
+}
+
 async function main() {
   const locations = [
     { name: "Marayoor", nameMl: "മറയൂർ", district: "Idukki" },
@@ -227,6 +329,8 @@ async function main() {
     }
     console.log(`Seeded ${DUMMY_PROPERTIES.length} dummy properties.`);
   }
+
+  await seedFlagshipProject();
 }
 
 main()
