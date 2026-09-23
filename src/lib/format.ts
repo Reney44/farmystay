@@ -1,6 +1,6 @@
 export function formatINR(value: number | null | undefined, locale: string = "en"): string {
   if (value == null) {
-    return locale === "ml" ? "വിലയ്ക്കായി ബന്ധപ്പെടുക" : "Contact for price";
+    return locale === "ml" ? "വില അന്വേഷണത്തിന് ലഭ്യമാണ്" : "Price on Request";
   }
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
