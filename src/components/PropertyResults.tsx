@@ -16,7 +16,7 @@ const PropertiesMap = dynamic(() => import("./PropertiesMap"), {
 type MapProperty = {
   id: string;
   title: string;
-  price: number;
+  price: number | null;
   latitude: number | null;
   longitude: number | null;
 };

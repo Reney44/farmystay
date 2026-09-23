@@ -1,12 +1,13 @@
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { Phone, MessageCircle, Mail, MapPin, Ruler } from "lucide-react";
+import { Phone, MessageCircle, Mail, MapPin, Ruler, Leaf, CalendarClock } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { formatINR, formatSize, localizedLocationName } from "@/lib/format";
 import { CATEGORY_ICONS } from "@/lib/category-icons";
 import MediaGallery from "@/components/MediaGallery";
 import SinglePropertyMap from "@/components/SinglePropertyMap";
+import ProjectSites from "@/components/ProjectSites";
 
 type Props = { params: Promise<{ id: string; locale: string }> };
 
@@ -15,7 +16,12 @@ export default async function PropertyDetailPage({ params }: Props) {
   const [property, session, t, tCategory, tStatus] = await Promise.all([
     prisma.property.findUnique({
       where: { id },
-      include: { location: true, media: { orderBy: { order: "asc" } }, owner: true },
+      include: {
+        location: true,
+        media: { orderBy: { order: "asc" } },
+        owner: true,
+        sites: { orderBy: { order: "asc" } },
+      },
     }),
     auth(),
     getTranslations("property"),
@@ -62,13 +68,43 @@ export default async function PropertyDetailPage({ params }: Props) {
           </div>
 
           <p className="mt-4 text-2xl font-semibold text-primary">
-            {formatINR(property.price)}
+            {formatINR(property.price, locale)}
           </p>
 
+          {property.isProject && (
+            <div className="mt-3 flex flex-wrap gap-4 text-sm text-muted-foreground">
+              {property.landType && (
+                <span className="flex items-center gap-1">
+                  <Leaf className="h-4 w-4" /> {t("landType")}: {property.landType}
+                </span>
+              )}
+              {property.completionDate && (
+                <span className="flex items-center gap-1">
+                  <CalendarClock className="h-4 w-4" /> {t("completionDate")}: {property.completionDate}
+                </span>
+              )}
+            </div>
+          )}
+
           <div className="mt-6">
-            <h2 className="mb-2 font-semibold text-foreground">{t("description")}</h2>
+            <h2 className="mb-2 font-semibold text-foreground">
+              {property.isProject ? t("aboutProject") : t("description")}
+            </h2>
             <p className="whitespace-pre-line text-foreground/90">{property.description}</p>
           </div>
+
+          {property.isProject && <ProjectSites sites={property.sites} />}
+
+          {property.isProject && property.amenities && (
+            <div className="mt-6">
+              <h2 className="mb-2 font-semibold text-foreground">{t("amenitiesTitle")}</h2>
+              <ul className="list-inside list-disc space-y-1 text-foreground/90">
+                {property.amenities.split("\n").map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {property.nearbyAttractions && (
             <div className="mt-6">
@@ -100,9 +136,13 @@ export default async function PropertyDetailPage({ params }: Props) {
         </div>
 
         <div className="h-fit rounded-xl border border-border bg-card p-5">
-          <h2 className="mb-1 font-semibold text-foreground">{t("contact")}</h2>
+          <h2 className="mb-1 font-semibold text-foreground">
+            {property.isProject ? t("investTitle") : t("contact")}
+          </h2>
           <p className="mb-3 text-sm text-muted-foreground">
-            {t("listedBy")}: {property.sellerType === "BROKER" ? t("broker") : t("owner")}
+            {property.isProject
+              ? t("investBody")
+              : `${t("listedBy")}: ${property.sellerType === "BROKER" ? t("broker") : t("owner")}`}
           </p>
           <p className="font-medium text-foreground">{property.contactName}</p>
 

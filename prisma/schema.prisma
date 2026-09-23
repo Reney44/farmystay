@@ -71,7 +71,7 @@ model Property {
   title              String
   description        String
   category           PropertyCategory
-  price              Float
+  price              Float?
   size               Float
   sizeUnit           SizeUnit          @default(CENT)
   locationId         String
@@ -94,9 +94,28 @@ model Property {
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
 
+  // Multi-unit investment projects (e.g. a resort-style development sold
+  // as individual sites) — optional, most listings leave these unset.
+  isProject          Boolean           @default(false)
+  landType           String?
+  amenities          String?
+  completionDate     String?
+  sites              ProjectSite[]
+
   @@index([status])
   @@index([category])
   @@index([locationId])
+}
+
+model ProjectSite {
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  label      String
+  villaType  String
+  bedrooms   Int?
+  highlight  String?
+  order      Int      @default(0)
 }
 
 model PropertyMedia {

@@ -1,6 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { MapPin, Ruler, ImageOff, Sparkles } from "lucide-react";
+import { MapPin, Ruler, ImageOff, Sparkles, Leaf } from "lucide-react";
 import { formatINR, formatSize, localizedLocationName } from "@/lib/format";
 import { CATEGORY_ICONS } from "@/lib/category-icons";
 import type { PropertyWithRelations } from "@/types/property";
@@ -11,6 +11,7 @@ export default async function PropertyCard({
   property: PropertyWithRelations;
 }) {
   const t = await getTranslations("category");
+  const tProperty = await getTranslations("property");
   const locale = await getLocale();
   const cover = property.media.find((m) => m.type === "IMAGE");
   const CategoryIcon = CATEGORY_ICONS[property.category];
@@ -33,10 +34,16 @@ export default async function PropertyCard({
             <ImageOff className="h-8 w-8" />
           </div>
         )}
-        {property.featured && (
-          <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-xs font-medium text-accent-foreground shadow-sm">
-            <Sparkles className="h-3 w-3" /> Featured
+        {property.isProject ? (
+          <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground shadow-sm">
+            <Leaf className="h-3 w-3" /> {tProperty("investmentProject")}
           </span>
+        ) : (
+          property.featured && (
+            <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-xs font-medium text-accent-foreground shadow-sm">
+              <Sparkles className="h-3 w-3" /> Featured
+            </span>
+          )
         )}
         <span className="absolute right-2 top-2 flex items-center gap-1 rounded-full bg-primary px-2.5 py-1 text-xs font-medium text-primary-foreground shadow-sm">
           <CategoryIcon className="h-3 w-3" />
@@ -56,7 +63,7 @@ export default async function PropertyCard({
           {formatSize(property.size, property.sizeUnit, locale)}
         </div>
         <p className="mt-2 text-lg font-semibold text-primary">
-          {formatINR(property.price)}
+          {formatINR(property.price, locale)}
         </p>
       </div>
     </Link>
